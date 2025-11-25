@@ -23,6 +23,7 @@ body {
   top: 0;
   left: 0;
   z-index: 2;
+  justify-content: center; /* centra toda a navbar */
 }
 
 .navbar ion-icon, .navbar img {
@@ -34,19 +35,29 @@ body {
   max-width: 935px;
   display: flex;
   justify-content: space-between;
+  align-items: center; /* alinha verticalmente */
   align-items: center;
   height: 100%;
 }
 
-.navbar .container > * {
+.navbar .container  {
   display: flex;
   align-items: center;
   height: 100%;
+  padding: 0 14px; 
+}
+
+.navbar .logo {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* espaço entre o ícone e o logo */
+   
 }
 
 .navbar .logo img {
   position: relative;
   top: 3px;
+   margin-left: 6px;
 }
 
 .navbar .logo .separador {
@@ -66,8 +77,23 @@ body {
   text-align: center;
 }
 
+.pesquisa input {
+  background: #FAFAFA;
+  border: 1px solid #DBDBDB;
+  border-radius: 3px;
+  padding: 5px 10px;
+  outline: none;
+  text-align: center;
+}
+
+.navbar .icones {
+  display: flex;
+  align-items: center;
+  gap: 12px; /* espaçamento entre os ícones da direita */
+}
+
 .navbar .icones ion-icon {
-  margin: 0 5px;
+  margin: 0 10px; /* você pode manter ou remover; com gap já nem precisa */
 }
 
 .navbar .icones-mobile {
@@ -87,62 +113,82 @@ body {
   max-width: 614px;
 }
 
-.stories {
-  display: flex;
-  align-items: center;
-  height: 118px;
-  border-radius: 3px;
-  border: 1px solid #DBDBDB;
-  padding: 0 18px;
-  overflow: hidden;
-  position: relative;
+/* Container geral */
+.stories-container {
+    width: 100%;
+    max-width: 614px;     /* largura padrão do feed do Instagram */
+    margin: 90px auto 20px auto; /* centraliza + empurra para baixo da navbar */
+    
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: white;
+    border: 1px solid #dbdbdb;
+    padding: 15px 10px;
+    overflow: hidden;
+    border-radius: 3px;
 }
 
+/* Área de rolagem */
+.stories-scroll {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    scrollbar-width: none; /* Firefox: remove a barrinha */
+}
+
+.stories-scroll::-webkit-scrollbar {
+    display: none; /* Chrome: remove a barrinha */
+}
+
+/* Cada story */
 .story {
-  display: flex;
-  height: 100%;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  padding: 14px 0;
-  font-size: 12px;
-  cursor: pointer;
-  margin-right: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.2s ease;
 }
 
-.story .imagem {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 66px;
-  width: 66px;
-  background-image: url('../assets/img/story-circle.svg');
-  
+.story:hover {
+    transform: scale(1.07);
 }
 
-.story .imagem img {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
+/* Círculo com borda rosa/laranja Instagram */
+.story-border {
+    width: 70px;
+    height: 70px;
+    padding: 3px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.story .usuario {
-  width: 66px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  text-align: center;
-  height: 14px;
+.story-border img {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: 2px solid white;
 }
 
-.stories .setinha {
-  position: absolute;
-  right: 10px;
-  top: 45px;
-  height: 32px;
-  width: 32px;
-  color: #940d0d;
-  font-size: 28px;
-  cursor: pointer;
+/* Nome do usuário */
+.story-user {
+    margin-top: 6px;
+    font-size: 12px;
+    color: #262626;
+}
+
+/* Setinha para navegação */
+.stories-arrow {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 30px;
+    cursor: pointer;
+    color: #444;
 }
 
 .post {
