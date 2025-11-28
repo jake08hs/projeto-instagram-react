@@ -1,36 +1,21 @@
 import React, { useState } from "react";
 
-// Lista de usuários dos stories
-const storyUsers = [
-  { img: "/assets/img/9gag.svg", user: "9gag" },
-  { img: "/assets/img/meowed.svg", user: "meowed" },
-  { img: "/assets/img/barked.svg", user: "barked" },
-  { img: "/assets/img/nathanwpylestrangeplanet.svg", user: "nathanwpylestrangeplanet" },
-  { img: "/assets/img/wawawicomics.svg", user: "wawawicomics" },
-  { img: "/assets/img/respondeai.svg", user: "respondeai" },
-  { img: "/assets/img/filomoderna.svg", user: "filomoderna" },
-  { img: "/assets/img/memeriagourmet.svg", user: "memeriagourmet" },
-];
-
-const Post = ({ username, userImage, postImage, initialLikes, caption }) => {
-  const [likes, setLikes] = useState(initialLikes);
+export default function Post({ username, userImage, postImage, initialLikes, caption }) {
   const [liked, setLiked] = useState(false);
-  const [lastLiker, setLastLiker] = useState(null); // armazena quem curtiu
+  const [likes, setLikes] = useState(initialLikes);
+  const [saved, setSaved] = useState(false);
 
-  const handleLike = () => {
+  const toggleLike = () => {
     if (!liked) {
       setLikes(likes + 1);
       setLiked(true);
-      // escolhe um usuário aleatório dos stories
-      const randomUser =
-        storyUsers[Math.floor(Math.random() * storyUsers.length)];
-      setLastLiker(randomUser);
     } else {
       setLikes(likes - 1);
       setLiked(false);
-      setLastLiker(null);
     }
   };
+
+  const toggleSave = () => setSaved(!saved);
 
   return (
     <div className="post">
@@ -45,7 +30,7 @@ const Post = ({ username, userImage, postImage, initialLikes, caption }) => {
       </div>
 
       <div className="conteudo">
-        <img src={postImage} alt="Post" />
+        <img src={postImage} alt="post" onClick={toggleLike} style={{ cursor: "pointer" }} />
       </div>
 
       <div className="fundo">
@@ -53,26 +38,32 @@ const Post = ({ username, userImage, postImage, initialLikes, caption }) => {
           <div>
             <ion-icon
               name={liked ? "heart" : "heart-outline"}
-              onClick={handleLike}
+              onClick={toggleLike}
+              style={{ color: liked ? "red" : "black", cursor: "pointer" }}
             ></ion-icon>
             <ion-icon name="chatbubble-outline"></ion-icon>
             <ion-icon name="paper-plane-outline"></ion-icon>
           </div>
           <div>
-            <ion-icon name="bookmark-outline"></ion-icon>
+            <ion-icon
+              name={saved ? "bookmark" : "bookmark-outline"}
+              onClick={toggleSave}
+              style={{ cursor: "pointer" }}
+            ></ion-icon>
           </div>
         </div>
 
         <div className="curtidas">
-          {/* Avatar de quem curtiu */}
-          {lastLiker && <img src={lastLiker.img} alt={lastLiker.user} />}
+          <img src={userImage} alt={username} />
           <span>
-            {likes} curtidas {lastLiker ? `(curtido por ${lastLiker.user})` : ""}
+            Curtido por <strong>{username}</strong> e <strong>{likes} pessoas</strong>
           </span>
+        </div>
+
+        <div className="caption">
+          <strong>{username}</strong> {caption}
         </div>
       </div>
     </div>
   );
-};
-
-export default Post;
+}

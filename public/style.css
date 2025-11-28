@@ -77,6 +77,27 @@ body {
   gap: 12px;
 }
 
+.big-heart {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 90px;
+  color: white;
+  opacity: 0.9;
+  animation: pop 0.8s ease;
+}
+
+@keyframes pop {
+  0% { transform: translate(-50%, -50%) scale(0.2); opacity: 0; }
+  50% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+}
+
+.liked {
+  color: red !important;
+}
+
 /* --- Corpo --- */
 .corpo {
   display: flex;
@@ -151,6 +172,10 @@ body {
   margin-top: 6px;
   font-size: 12px;
   color: #262626;
+  max-width: 60px;      /* limita o tamanho ocupado */
+  white-space: nowrap;  /* impede quebrar linha */
+  overflow: hidden;     /* esconde o excedente */
+  text-overflow: ellipsis; /* adiciona os "..." */
 }
 
 .stories-arrow {
@@ -252,20 +277,18 @@ body {
 
 /* --- Sidebar atualizado --- */
 .sidebar {
-  position: fixed;      /* flutua sobre tudo */
-  top: 80px;            /* logo abaixo da navbar */
-  right: 20px;          /* distância da borda direita */
+  position: fixed;      
+  top: 100px;                 
+  right: 150px;
   width: 293px;
-  background-color: #fff;
-  border: 1px solid #DBDBDB;
-  border-radius: 8px;
-  padding: 16px;
-  z-index: 999;         
+  background-color :none;     
+  border: none;
+  box-shadow: none;
+  padding: 0;      
   display: flex;      
   flex-direction: column;
-  gap: 16px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  transition: all 0.3s ease;
+  gap: 20px;
+
 }
 
 /* Mostra o sidebar quando aberto */
@@ -286,10 +309,14 @@ body {
   border-radius: 50%;
 }
 
+.usuario-texto ion-icon {
+  margin-left: 6px;
+}
+
 .usuario-texto {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
   font-weight: 700;
   color: #262626;
 }
@@ -317,30 +344,32 @@ body {
   object-fit: cover;
 }
 .ver-tudo {
+  font-size: 12px;
   color: #999;
   cursor: pointer;
   font-weight: 400;
-  font-size: 12px;
 }
 
 /* Lista de sugestões */
 .sugestoes-lista {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 14px;
 }
 
 .sugestao {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 12px;
-  width: 100%;
+  padding-right: 8px;
+ /* margin-bottom: 12px;
+  width: 100%; */
+
 }
 
 .sugestao-info {
   display: flex;
-  flex-direction: column;
+  flex-direction: center;
   gap: 10px;
 }
 
@@ -356,9 +385,15 @@ body {
 .texto-sugestao strong {
   font-weight: 600;
   font-size: 14px;
+  color: #262626;
+   display: block;
 }
 
 .texto-sugestao span {
+  padding: 3px;;
+  margin-top: 3px;
+  display: flex;
+  flex-direction: column;
   font-size: 12px;
   color: #8E8E8E;
 }
@@ -386,4 +421,5 @@ body {
   font-size: 11px;
   color: #C7C7C7;
   line-height: 1.3;
+  max-width: 250px;
 }

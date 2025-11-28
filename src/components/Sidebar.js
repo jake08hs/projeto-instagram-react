@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 const suggestions = [
   { user: "bad.vibes.memes", status: "Segue você", img: "assets/img/bad.vibes.memes.svg" },
@@ -8,15 +8,37 @@ const suggestions = [
   { user: "smallcutecats", status: "Seguir", img: "assets/img/smallcutecats.svg" },
 ];
 
-const Sidebar = () => {
+export default function Sidebar() {
+  const [username, setUsername] = useState("catanacomics");
+  const [userImage, setUserImage] = useState("assets/img/catanacomics.svg");
+
+  const editUsername = () => {
+    const newName = prompt("Digite seu novo nome:");
+    if (newName) setUsername(newName);
+  };
+
+  const editUserImage = () => {
+    const newImage = prompt("Digite o link da nova imagem:");
+    if (newImage) setUserImage(newImage);
+  };
+
   return (
     <aside className="sidebar">
-      {/* Usuário maior */}
+      {/* Usuário principal */}
       <div className="usuario-principal">
-        <img src="assets/img/catanacomics.svg" alt="catanacomics" />
+        <img
+          src={userImage}
+          alt={username}
+          onClick={editUserImage}
+          style={{ cursor: "pointer" }}
+        />
         <div className="usuario-texto">
-          <strong>catanacomics</strong>
-          <ion-icon name="pencil-outline"></ion-icon>
+          <strong onClick={editUsername} style={{ cursor: "pointer" }}>{username}</strong>
+          <ion-icon
+            name="pencil-outline"
+            onClick={editUsername}
+            style={{ cursor: "pointer" }}
+          ></ion-icon>
         </div>
       </div>
 
@@ -54,6 +76,4 @@ const Sidebar = () => {
       </div>
     </aside>
   );
-};
-
-export default Sidebar;
+}

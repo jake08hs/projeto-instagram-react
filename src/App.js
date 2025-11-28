@@ -2,8 +2,6 @@ import { useState } from "react";
 import Navbar from "./components/Navbar";
 import Stories from "./components/Stories";
 import Feed from "./components/Feed";
-import User from "./components/User";
-import Suggestions from "./components/Suggestions";
 import Sidebar from "./components/Sidebar";
 
 function App() {
@@ -21,10 +19,8 @@ function App() {
           <Stories />
           <Feed />
         </main>
-
         <aside className="right-column">
-          <User />
-          <Suggestions />
+          {/* Removido o User daqui, só permanece dentro do Sidebar */}
         </aside>
       </div>
     </>

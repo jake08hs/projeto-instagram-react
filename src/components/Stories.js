@@ -1,3 +1,5 @@
+import Story from "./Story";
+
 export default function Stories() {
     const stories = [
         { img: "assets/img/9gag.svg", user: "9gag" },
@@ -14,12 +16,7 @@ export default function Stories() {
         <div className="stories-container">
             <div className="stories-scroll">
                 {stories.map((s) => (
-                    <div className="story" key={s.user}>
-                        <div className="story-border">
-                            <img src={s.img} alt={s.user} />
-                        </div>
-                        <div className="story-user">{s.user}</div>
-                    </div>
+                    <Story key={s.user} img={s.img} user={s.user} />
                 ))}
             </div>
 
